@@ -6,10 +6,10 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 1,
-   reporter: [['html', {
-    outputFolder: 'playwright-report',
-    open: 'never'
-  }]],
+    reporter: [
+    ['html', { open: 'never' }],
+    ['allure-playwright']
+  ],
   use: {
     trace: 'on-first-retry',
     ignoreHTTPSErrors: true,
