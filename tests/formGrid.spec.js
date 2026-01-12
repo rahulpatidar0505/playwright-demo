@@ -1,8 +1,15 @@
 import {test, expect} from '@playwright/test';
 
+test.only('Test 1: Verify the title', async ({ browser, context, page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
 test.describe('Form Grid Tests', () => {
 
-  test.only('Verify successful form submission with all valid data', async ({page}) => {
+  test('Verify successful form submission with all valid data', async ({page}) => {
     await page.goto('https://zenetratechnologies.com/practice-app');
     await expect(page).toHaveTitle(/Playwright Practice Application/);
     await page.getByRole('button', { name: 'Accept All' }).click();

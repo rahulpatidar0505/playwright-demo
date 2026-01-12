@@ -2,18 +2,19 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  outputDir: './playwright-output',
-  fullyParallel: true,
-  retries: process.env.CI ? 2 : 0,
+  fullyParallel: false,
+  retries: process.env.CI ? 2 : 1, // Retries only occur on test failures 
   workers: process.env.CI ? 1 : 1,
-    reporter: [
-    ['html', { open: 'never' }],
-    ['allure-playwright']
+  outputDir: 'reports/test-results',
+  reporter: [
+    ['html', { open: 'never', outputFolder: 'reports/playwright-report' }],
+    ['allure-playwright', { resultsDir: 'reports/allure-results' }]
   ],
   use: {
     trace: 'on-first-retry',
-    ignoreHTTPSErrors: true,
+    video: 'on-first-retry',
     viewport: null,
+    ignoreHTTPSErrors: true,
     launchOptions: {
       args: ['--start-maximized']
     },
@@ -29,6 +30,5 @@ export default defineConfig({
       },
     },
   ],
-
 });
 
