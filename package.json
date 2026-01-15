@@ -7,7 +7,7 @@
     "test": "npx playwright test --headed",
     "test:headless": "npx playwright test",
     "html:report": "npx playwright show-report reports/playwright-report",
-    "codegen": "npx playwright codegen",
+    "record": "npx playwright codegen",
     "allure:generate": "npx allure generate reports/allure-results -o reports/allure-report --clean",
     "allure:open": "npx allure open reports/allure-report",
     "allure:report": "npx allure generate reports/allure-results -o reports/allure-report --clean && npx allure open reports/allure-report"

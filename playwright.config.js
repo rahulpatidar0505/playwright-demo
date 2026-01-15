@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
-  retries: process.env.CI ? 2 : 1, // Retries only occur on test failures 
+  retries: process.env.CI ? 2 : 0, // Retries only occur on test failures 
   workers: process.env.CI ? 1 : 1,
   outputDir: 'reports/test-results',
   reporter: [
@@ -21,14 +21,14 @@ export default defineConfig({
   },
 
   projects: [
-    // {
-    //   name: 'chromium',
-    //   use: { 
-    //     ...devices['Desktop Chrome'],
-    //     viewport: null,
-    //     deviceScaleFactor: undefined,
-    //   },
-    // },
+    {
+      name: 'chromium',
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: null,
+        deviceScaleFactor: undefined,
+      },
+    },
     
     // {
     //   name: 'firefox',
@@ -46,10 +46,10 @@ export default defineConfig({
     //   use: { ...devices['Pixel 5'] },
     // },
 
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
 
     /* Test against branded browsers. */
     // {

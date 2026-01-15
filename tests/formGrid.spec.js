@@ -1,17 +1,13 @@
 import {test, expect} from '@playwright/test';
 
-
-
-  test.only('Test 1: Verify the title', async ({ page }) => {
+  test.beforeEach('Navigate and verify the title', async ({ page }) => {
       await page.goto('https://zenetratechnologies.com/practice-app');
       await expect(page).toHaveTitle(/Playwright Practice Application/);
   });
 
-
 test.describe('Form Grid Tests', () => {
 
   test('Verify successful form submission with all valid data', async ({page}) => {
-    await page.goto('https://zenetratechnologies.com/practice-app');
     await page.getByRole('button', { name: 'Accept All' }).click();
     await page.getByPlaceholder('First Name').fill('John');
     await page.getByPlaceholder('Last Name').fill('Doe');
@@ -23,4 +19,6 @@ test.describe('Form Grid Tests', () => {
     await page.getByRole('button', { name: 'Submit' }).click();
     await expect(page.getByText('Grid form submitted successfully!')).toBeVisible();
   });
+
+
 });

@@ -16,12 +16,10 @@ test.afterEach(async ({ page }) => {
   console.log('Test finished');
 });
 
-test('Test 1: Verify the title', async ({ page }) => {
+test('Test 1', async ({ page }) => {
     console.log('Executing Test 1');
-    await page.goto('https://zenetratechnologies.com/practice-app');
-    await expect(page).toHaveTitle(/Playwright Practice Application/);
 });
 
-test('Test 2: Verify the title', async ({ page }) => {
+test('Test 2', async ({ page }) => {
     console.log('Executing Test 2');
 });
