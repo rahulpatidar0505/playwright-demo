@@ -11,8 +11,8 @@ export default defineConfig({
     ['allure-playwright', { resultsDir: 'reports/allure-results' }]
   ],
   use: {
-    trace: 'on-first-retry',
-    video: 'on-first-retry',
+    trace: 'retain-on-failure',
+    video: 'retain-on-failure',
     viewport: null,
     ignoreHTTPSErrors: true,
     launchOptions: {
@@ -21,14 +21,45 @@ export default defineConfig({
   },
 
   projects: [
+    // {
+    //   name: 'chromium',
+    //   use: { 
+    //     ...devices['Desktop Chrome'],
+    //     viewport: null,
+    //     deviceScaleFactor: undefined,
+    //   },
+    // },
+    
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+
     {
-      name: 'chromium',
-      use: { 
-        ...devices['Desktop Chrome'],
-        viewport: null,
-        deviceScaleFactor: undefined,
-      },
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] },
     },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
   ],
 });
-
