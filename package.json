@@ -10,7 +10,10 @@
     "record": "npx playwright codegen",
     "allure:generate": "npx allure generate reports/allure-results -o reports/allure-report --clean",
     "allure:open": "npx allure open reports/allure-report",
-    "allure:report": "npx allure generate reports/allure-results -o reports/allure-report --clean && npx allure open reports/allure-report"
+    "allure:report": "npx allure generate reports/allure-results -o reports/allure-report --clean && npx allure open reports/allure-report",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:files": "prettier --write"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +21,8 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.6",
-    "allure-playwright": "^3.4.4"
+    "allure-playwright": "^3.4.4",
+    "prettier": "^3.8.0"
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0"

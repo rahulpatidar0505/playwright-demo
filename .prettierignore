@@ -1,0 +1,21 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+dist
+*.tsbuildinfo
+package-lock.json
+
+# Ignore generated reports:
+reports/
+test-results/
+
+# Ignore log files:
+*.log
+
+# Ignore OS files:
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files:
+.vscode/settings.json

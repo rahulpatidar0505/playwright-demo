@@ -1,0 +1,22 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:4200",
+      "localStorage": [
+        {
+          "name": "cookie_consent",
+          "value": "true"
+        },
+        {
+          "name": "authSession",
+          "value": "{\"id\":\"admin\",\"username\":\"admin\",\"role\":\"admin\",\"name\":\"Admin User\",\"permissions\":[\"read\",\"write\",\"delete\",\"manage-users\"],\"loginTime\":\"2026-01-19T12:46:40.507Z\",\"expiresAt\":\"2026-01-20T12:46:40.507Z\"}"
+        },
+        {
+          "name": "userPreferences",
+          "value": "{\"theme\":\"default\",\"language\":\"en\",\"timezone\":\"Asia/Calcutta\",\"lastLogin\":\"2026-01-19T12:46:40.519Z\"}"
+        }
+      ]
+    }
+  ]
+}

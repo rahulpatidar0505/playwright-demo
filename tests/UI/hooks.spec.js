@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test.beforeAll(async () => {
   console.log('Runs once before all tests');
@@ -17,9 +17,9 @@ test.afterEach(async ({ page }) => {
 });
 
 test('Test 1', async ({ page }) => {
-    console.log('Executing Test 1');
+  console.log('Executing Test 1');
 });
 
 test('Test 2', async ({ page }) => {
-    console.log('Executing Test 2');
+  console.log('Executing Test 2');
 });

@@ -1,0 +1,5 @@
+Sample Text File
+
+This is a sample text file for testing download functionality.
+
+Generated on: 2026-01-19T08:50:42.438Z
