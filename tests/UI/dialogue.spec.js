@@ -101,7 +101,7 @@ test('Handle New Window', async ({ page, context }) => {
   console.log(await newPage.title());
 });
 
-test.only('Open External Site', async ({ page, context }) => {
+test('Open External Site', async ({ page, context }) => {
   const [newPage] = await Promise.all([
     context.waitForEvent('page'),
     page.click('[data-testid="openExternalLink"]'),
