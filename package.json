@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test --headed",
+    "test:api": "npx playwright test tests/API",
     "test:headless": "npx playwright test",
     "html:report": "npx playwright show-report reports/playwright-report",
     "record": "npx playwright codegen",

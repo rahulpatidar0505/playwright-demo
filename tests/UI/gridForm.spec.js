@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach('Navigate and verify the title', async ({ page }) => {
-  await page.goto('http://localhost:4200/practice-app');
+  await page.goto('https://zenetratechnologies.com/practice-app');
   await expect(page).toHaveTitle(/Playwright Practice Application/);
 });
 

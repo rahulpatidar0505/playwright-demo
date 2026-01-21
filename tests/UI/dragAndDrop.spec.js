@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Drag and Drop test', async ({ page }) => {
-  await page.goto('http://localhost:4200/practice-app');
+  await page.goto('https://zenetratechnologies.com/practice-app');
   await page.getByRole('button', { name: 'Accept All' }).click();
   await page.getByText('🎨UI Elements').click();
   await expect(

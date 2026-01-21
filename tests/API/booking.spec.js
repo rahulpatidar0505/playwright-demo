@@ -5,7 +5,7 @@ const { DateTime } = require('luxon');
 const BASE_URL = 'https://restful-booker.herokuapp.com';
 let token;
 
-test.beforeEach('Create authentication token', async ({ request }) => {
+test.beforeAll('Create authentication token', async ({ request }) => {
   // Create authentication token request
 
   const response = await request.post(`${BASE_URL}/auth`, {
@@ -49,12 +49,9 @@ const bookingDetails = require('../../testData/booking-details.json');
 test('should be able to create a booking with dynamic data', async ({
   request,
 }) => {
-  const response = await request.post(
-    `https://restful-booker.herokuapp.com/booking`,
-    {
-      data: bookingDetails,
-    }
-  );
+  const response = await request.post(`${BASE_URL}/booking`, {
+    data: bookingDetails,
+  });
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
@@ -85,7 +82,7 @@ const currentDatePlusFive = DateTime.now()
   .toFormat('yyyy-MM-dd');
 
 test('should be able to create a booking 2', async ({ request }) => {
-  const response = await request.post(`/booking`, {
+  const response = await request.post(`${BASE_URL}/booking`, {
     data: {
       firstname: randomFirstName,
       lastname: randomLastName,
@@ -98,10 +95,131 @@ test('should be able to create a booking 2', async ({ request }) => {
       additionalneeds: 'Breakfast',
     },
   });
-  console.log(await response.json());
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody.booking).toHaveProperty('firstname', randomFirstName);
   expect(responseBody.booking).toHaveProperty('lastname', randomLastName);
+});
+
+// Test to get all booking IDs
+test('should be able to get all bookings', async ({ request }) => {
+  const response = await request.get(`${BASE_URL}/booking`);
+  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(200);
+  const responseBody = await response.json();
+  expect(Array.isArray(responseBody)).toBeTruthy();
+  expect(responseBody.length).toBeGreaterThan(0);
+  expect(responseBody[0]).toHaveProperty('bookingid');
+});
+
+// Test to get a specific booking by ID
+test('should be able to get a booking by ID', async ({ request }) => {
+  const bookingId = 1;
+  const response = await request.get(`${BASE_URL}/booking/${bookingId}`);
+  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(200);
+  const responseBody = await response.json();
+  // Verify booking has required properties
+  expect(responseBody).toHaveProperty('firstname');
+  expect(responseBody).toHaveProperty('lastname');
+  expect(responseBody).toHaveProperty('totalprice');
+  expect(responseBody).toHaveProperty('depositpaid');
+  expect(responseBody).toHaveProperty('bookingdates');
+  expect(responseBody.bookingdates).toHaveProperty('checkin');
+  expect(responseBody.bookingdates).toHaveProperty('checkout');
+});
+
+// CRUD Operations - Create, Read, Update, Delete a booking (Serial Execution)
+test.describe.serial('CRUD operations on a booking', () => {
+  let bookingId;
+
+  test('CREATE - should be able to create a new booking', async ({
+    request,
+  }) => {
+    const createResponse = await request.post(`${BASE_URL}/booking`, {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe',
+        totalprice: 500,
+        depositpaid: true,
+        bookingdates: {
+          checkin: '2024-01-01',
+          checkout: '2024-01-10',
+        },
+        additionalneeds: 'Lunch',
+      },
+    });
+    expect(createResponse.ok()).toBeTruthy();
+    expect(createResponse.status()).toBe(200);
+    const createBody = await createResponse.json();
+    bookingId = createBody.bookingid;
+    expect(bookingId).toBeDefined();
+    console.log(`Created booking with ID: ${bookingId}`);
+  });
+
+  test('READ - should be able to get the created booking', async ({
+    request,
+  }) => {
+    const getResponse = await request.get(`${BASE_URL}/booking/${bookingId}`);
+    expect(getResponse.ok()).toBeTruthy();
+    expect(getResponse.status()).toBe(200);
+    const getBody = await getResponse.json();
+    expect(getBody).toHaveProperty('firstname', 'John');
+    expect(getBody).toHaveProperty('lastname', 'Doe');
+  });
+
+  test('UPDATE - should be able to update the booking', async ({ request }) => {
+    const updateResponse = await request.put(
+      `${BASE_URL}/booking/${bookingId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Cookie: `token=${token}`,
+        },
+        data: {
+          firstname: 'Rahul',
+          lastname: 'Jones',
+          totalprice: 691,
+          depositpaid: false,
+          bookingdates: {
+            checkin: '2020-11-15',
+            checkout: '2025-01-18',
+          },
+          additionalneeds: 'Breakfast',
+        },
+      }
+    );
+    expect(updateResponse.ok()).toBeTruthy();
+    expect(updateResponse.status()).toBe(200);
+    const updateBody = await updateResponse.json();
+    expect(updateBody).toHaveProperty('firstname', 'Rahul');
+    expect(updateBody).toHaveProperty('lastname', 'Jones');
+    expect(updateBody).toHaveProperty('totalprice', 691);
+    expect(updateBody).toHaveProperty('depositpaid', false);
+    expect(updateBody.bookingdates).toHaveProperty('checkin', '2020-11-15');
+    expect(updateBody.bookingdates).toHaveProperty('checkout', '2025-01-18');
+    expect(updateBody).toHaveProperty('additionalneeds', 'Breakfast');
+  });
+
+  test('DELETE - should be able to delete the booking', async ({ request }) => {
+    const deleteResponse = await request.delete(
+      `${BASE_URL}/booking/${bookingId}`,
+      {
+        headers: {
+          Cookie: `token=${token}`,
+        },
+      }
+    );
+    expect(deleteResponse.status()).toBe(201);
+  });
+
+  test('VERIFY DELETE - should confirm booking is deleted', async ({
+    request,
+  }) => {
+    const verifyResponse = await request.get(
+      `${BASE_URL}/booking/${bookingId}`
+    );
+    expect(verifyResponse.status()).toBe(404);
+  });
 });

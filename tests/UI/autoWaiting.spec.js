@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:4200/practice-app');
+  await page.goto('https://zenetratechnologies.com/practice-app');
   await page.getByRole('button', { name: 'Accept All' }).click();
   await page.getByText('⏱️').click();
 
@@ -22,7 +22,7 @@ test.describe('Auto Waiting Examples', () => {
     // Set longer timeout for slow applications
     test.setTimeout(120000); // 2 minutes
 
-    await page.goto('http://localhost:4200/practice-app', {
+    await page.goto('https://zenetratechnologies.com/practice-app', {
       waitUntil: 'networkidle',
     });
     await page.getByRole('button', { name: 'Accept All' }).click();

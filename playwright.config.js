@@ -2,11 +2,16 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  // testMatch: ['formGrid.spec.js', 'dialogue.spec.js'],
+  testMatch: ['**/*.spec.js'],
   fullyParallel: false,
   retries: process.env.CI ? 2 : 0, // Retries only occur on test failures
   workers: process.env.CI ? 1 : 1,
   outputDir: 'reports/test-results',
+
+  timeout: 30000, // Global timeout for each test (30 seconds)
+  expect: {
+    timeout: 5000, // Timeout for expect() assertions (5 seconds)
+  },
   reporter: [
     ['html', { open: 'never', outputFolder: 'reports/playwright-report' }],
     ['allure-playwright', { resultsDir: 'reports/allure-results' }],
@@ -16,6 +21,8 @@ export default defineConfig({
     video: 'off',
     viewport: null,
     ignoreHTTPSErrors: true,
+    actionTimeout: 5000, // Timeout for each action like click, fill, etc. (5 seconds)
+    navigationTimeout: 10000, // Timeout for page navigations (10 seconds)
     launchOptions: {
       args: ['--start-maximized'],
     },

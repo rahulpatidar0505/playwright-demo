@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Authentication Tests', () => {
   test('Handle Authentication - Save State', async ({ page }) => {
-    await page.goto('http://localhost:4200/practice-app');
+    await page.goto('https://zenetratechnologies.com/practice-app');
 
     // Wait for page to load and then accept cookies
     await page.waitForLoadState('domcontentloaded');
@@ -40,10 +40,9 @@ test.describe('Authentication Tests', () => {
       storageState: './auth-state.json',
     });
     const page = await context.newPage();
-    await page.pause();
 
     // Navigate to the application
-    await page.goto('http://localhost:4200/practice-app');
+    await page.goto('https://zenetratechnologies.com/practice-app');
     await page.waitForLoadState('domcontentloaded');
 
     // Navigate to authentication page
