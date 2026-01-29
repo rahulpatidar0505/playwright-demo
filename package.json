@@ -23,6 +23,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.6",
     "allure-playwright": "^3.4.4",
+    "playwright-smart-reporter": "^1.0.5",
     "prettier": "^3.8.0"
   },
   "dependencies": {

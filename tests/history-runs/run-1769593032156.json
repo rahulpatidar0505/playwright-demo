@@ -1,0 +1,112 @@
+{
+  "runId": "run-1769593032156",
+  "timestamp": "2026-01-28T09:37:12.157Z",
+  "tests": {
+    "UI\\webtable.spec.js::Test: Add/Edit/Delete Records - Verify all CRUD operations work correctly": {
+      "testId": "UI\\webtable.spec.js::Test: Add/Edit/Delete Records - Verify all CRUD operations work correctly",
+      "title": "Test: Add/Edit/Delete Records - Verify all CRUD operations work correctly",
+      "file": "UI\\webtable.spec.js",
+      "status": "passed",
+      "duration": 5977,
+      "retry": 0,
+      "steps": [
+        {
+          "title": "Launch browser",
+          "duration": 1045,
+          "category": "pw:api"
+        },
+        {
+          "title": "Create context",
+          "duration": 25,
+          "category": "pw:api"
+        },
+        {
+          "title": "Create page",
+          "duration": 308,
+          "category": "pw:api"
+        },
+        {
+          "title": "Navigate to \"/practice-app\"",
+          "duration": 1329,
+          "category": "pw:api",
+          "isSlowest": true
+        },
+        {
+          "title": "Click getByRole('button', { name: 'Accept All' })",
+          "duration": 106,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click getByText('📋Smart Table')",
+          "duration": 1251,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click getByTestId('addRowBtn')",
+          "duration": 1068,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"Test\" getByLabel('First Name *').or(getByPlaceholder('First Name *'))",
+          "duration": 85,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"User\" getByLabel('Last Name *').or(getByPlaceholder('Last Name *'))",
+          "duration": 41,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"testuser\" getByTestId('newUsername')",
+          "duration": 45,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"test@test.com\" getByLabel('E-mail *').or(getByPlaceholder('E-mail *'))",
+          "duration": 46,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"30\" getByTestId('newAge')",
+          "duration": 31,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click getByTestId('saveNewRow')",
+          "duration": 102,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click locator('[data-testid=\"smartTable\"]').locator('tr').filter({ hasText: 'Test' }).first().locator('button:has-text(\"✏️\")')",
+          "duration": 67,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"Test123\" locator('//td[3]//input[@type=\"text\"]')",
+          "duration": 18,
+          "category": "pw:api"
+        },
+        {
+          "title": "Fill \"User123\" locator('//td[4]//input[@type=\"text\"]')",
+          "duration": 46,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click getByRole('button', { name: '✅' })",
+          "duration": 307,
+          "category": "pw:api"
+        },
+        {
+          "title": "Click locator('[data-testid=\"smartTable\"]').locator('tr').filter({ hasText: 'Test123' }).first().locator('button:has-text(\"🗑️\")')",
+          "duration": 458,
+          "category": "pw:api"
+        },
+        {
+          "title": "Close context",
+          "duration": 49,
+          "category": "pw:api"
+        }
+      ]
+    }
+  }
+}
