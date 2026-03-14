@@ -35,7 +35,7 @@ test('should be able to create a booking', async ({ request }) => {
       additionalneeds: 'Breakfast',
     },
   });
-  expect(response.ok()).toBeTruthy();
+ 
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody.booking).toHaveProperty('firstname', 'Jim');

@@ -6,7 +6,7 @@ test.beforeEach('Navigate to Smart Table', async ({ page }) => {
   await page.getByText('📋Smart Table').click();
 });
 
-test.only('Test: Add/Edit/Delete Records - Verify all CRUD operations work correctly', async ({
+test('Test: Add/Edit/Delete Records - Verify all CRUD operations work correctly', async ({
   page,
 }) => {
   const table = page.locator('[data-testid="smartTable"]');
