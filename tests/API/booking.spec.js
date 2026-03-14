@@ -35,7 +35,7 @@ test('should be able to create a booking', async ({ request }) => {
       additionalneeds: 'Breakfast',
     },
   });
- 
+
   expect(response.status()).toBe(200);
   const responseBody = await response.json();
   expect(responseBody.booking).toHaveProperty('firstname', 'Jim');
@@ -223,3 +223,5 @@ test.describe.serial('CRUD operations on a booking', () => {
     expect(verifyResponse.status()).toBe(404);
   });
 });
+
+// added new code
